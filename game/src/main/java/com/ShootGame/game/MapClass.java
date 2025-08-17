@@ -32,8 +32,8 @@ public class MapClass{
         int cellSize = 60;
         int[][] matrix = requestMap(req_map);
 
-        double startX = (sceneWidth - matrix[0].length * cellSize) / 2;
-        double startY = (sceneHeight - matrix.length * cellSize) / 2;
+        double startX = (sceneWidth - matrix[0].length * 60 + 60 - 30) / 2;
+        double startY = (sceneHeight - matrix.length * 60 + 60 - 30) / 2;
 
         for (int row = 0; row < matrix.length; row++) {
             for (int col = 0; col < matrix[row].length; col++) {
@@ -51,8 +51,8 @@ public class MapClass{
     int[][] matrix = requestMap(req_map);
 
     // Calculate starting coordinates
-    double startX = (sceneWidth - matrix[0].length )/2 ;
-    double startY = (sceneHeight - matrix.length )/2 ;
+    double startX = (sceneWidth - matrix[0].length * 60 + 60 - 30) / 2;
+    double startY = (sceneHeight - matrix.length * 60 + 60 - 30) / 2;
     
     
     int[] middle = new int[2];
@@ -61,16 +61,24 @@ public class MapClass{
 
     return middle;
 }
-public HashMap<String, Boolean> mapHash(int[][] matrix) {
-    HashMap<String, Boolean> hash = new HashMap<>();
 
-    for (int row = 0; row < matrix.length; row++) {
-        for (int col = 0; col < matrix[row].length; col++) {
-            boolean isPassable = (matrix[row][col] == 1);
-            hash.put(row + "," + col, isPassable);
+public HashMap <String, Boolean> mapBounds(int map_req){
+    boolean isTrue=true;
+    HashMap<String,Boolean> mapBounds = new HashMap<>();
+    int[][]matrix=requestMap(map_req);
+    for(int i=0; i<matrix.length;i++){
+        for(int j=0;j<matrix[i].length;j++){
+            if(matrix[i][j]==1){
+                mapBounds.put(i+","+j, isTrue);
+            }
+            else{
+                mapBounds.put(i+","+j, !isTrue);
+            }
+            
         }
     }
-
-    return hash;
+    return mapBounds;
 }
+
+
 }
